@@ -62,7 +62,7 @@ class Gem::Commands::InaboxCommand < Gem::Command
       File.open(gemfile, "rb") do |file|
         request_body, request_headers = Multipart::MultipartPost.new.prepare_query("file" => file)
 
-        proxy.start(url.host, url.port) {|con|
+        proxy.start(url.host, url.port, :use_ssl => (url.scheme == 'https')) {|con|
           req = Net::HTTP::Post.new(url.path+'/upload', request_headers)
           req.basic_auth(url.user, url.password) if url.user
           handle_response(con.request(req, request_body))
