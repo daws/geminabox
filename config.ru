@@ -1,14 +1,12 @@
 $:.unshift(File.expand_path(File.join(File.dirname(__FILE__), "lib")))
 require 'logger'
-require "geminabox"
+require 'geminabox'
+
+logger = Logger.new('/var/log/rails_services/geminabox.log')
 
 class Geminabox
-
-  def setup_custom_logger(builder)
-    logger = Logger.new('/var/log/rails_services/geminabox.log')
-    builder.use Rack::CommonLogger, logger
-  end
-
+  use Rack::CommonLogger, logger
+  use Rack::Logger, logger
 end
 
 run Geminabox
