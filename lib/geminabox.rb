@@ -4,7 +4,6 @@ require 'bundler/setup'
 require "digest/md5"
 require "builder"
 require 'sinatra/base'
-require 'rubygems/builder'
 require "rubygems/indexer"
 
 require 'hostess'
